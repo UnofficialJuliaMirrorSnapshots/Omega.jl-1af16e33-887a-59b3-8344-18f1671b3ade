@@ -3,7 +3,7 @@ function anyₛ(xs::AbstractArray{T, N}) where {T <: SoftBool, N}
 end
 
 function allₛ(xs::AbstractArray{T, N}) where {T <: SoftBool, N}
-  SoftBool(minimum([sb.logerr for sb in xs]))
+  SoftBool(sum([sb.logerr for sb in xs]))
 end
 
 function anyₛ(xs::AbstractArray{T, N}) where {T <: DualSoftBool, N}
@@ -18,4 +18,4 @@ function allₛ(xs::AbstractArray{T, N}) where {T <: DualSoftBool, N}
   DualSoftBool(b0, b1)
 end
 
-softeq(a::AbstractArray, b::AbstractArray) = anyₛ(softeq.(a, b))
+softeq(a::AbstractArray, b::AbstractArray) = allₛ(softeq.(a, b))
